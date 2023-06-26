@@ -9,7 +9,6 @@ import { Button } from '../../components/button'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { useState } from 'react'
-
 import { api } from "../../services/api"
 
 
@@ -58,10 +57,28 @@ export function NewNote() {
     
     async function handleRegisterNote() {
 
+        if(!title){
+            return alert("Please, inform the note title.")
+        }
+
+        if(newLink){
+            return alert("You have not added the link! Please, click the add button.")
+        }
+
+        if(newTag){
+            return alert("You have not added the tag! Please, click the add button.")
+        }
+
+
+
         await api.post("/notes", { title, description, tags, links })
-        .then( () => 
+        .then(() => {
+
+        alert("The note was sucessfully created.")
         navigate('/')
-        ) .catch(error => {
+
+        })
+        .catch(error => {
             if (error.response) {
                 alert(error.response.data.message)
             }

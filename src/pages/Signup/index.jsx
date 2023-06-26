@@ -26,7 +26,7 @@ export function Signup(){
         api.post("/users", { name, email, password })
         .then(() => {
             alert("User successfully registered.")
-            navigate("/")
+            navigate(-1)
         })
         .catch(error => {
             if (error.response) {
